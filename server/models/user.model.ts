@@ -6,6 +6,7 @@ export interface IUserDocument extends Document {
   email: string;
   password: string;
   stripeCustomerId?: string;
+  comparePassword: (candidatePassword: string) => Promise<boolean>;
 }
 
 export const User = defineMongooseModel<IUserDocument>({
