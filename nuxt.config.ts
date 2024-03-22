@@ -11,6 +11,7 @@ export default defineNuxtConfig({
       type: 'authjs',
     },
   },
+  ui: {},
   runtimeConfig: {
     auth: {
       origin: process.env.AUTH_ORIGIN,

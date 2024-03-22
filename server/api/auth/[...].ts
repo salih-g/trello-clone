@@ -8,13 +8,19 @@ async function getUser(id: string) {
 
 export default NuxtAuthHandler({
   secret: useRuntimeConfig().auth.secret,
+  pages: {
+    signIn: '/auth/login',
+    signOut: '/auth/register',
+  },
   providers: [
     //@ts-ignore
     Credentials.default({
       name: 'credentials',
       origin: useRuntimeConfig().auth.origin,
       async authorize(credentials: { email: string; password: string }) {
-        const user = await User.findOne({ email: credentials.email });
+        const user = await User.findOne({ email: credentials.email }).select(
+          '+password'
+        );
         if (!user) {
           return null;
         }
